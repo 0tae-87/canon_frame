@@ -1,0 +1,12 @@
+                object   n obs_trunc/full gen: only/full gen: reg/full   (bbox extent ratios, mean of x,y,z)
+   005_tomato_soup_can  50           0.86           0.89          0.94
+    006_mustard_bottle  49           0.82           0.83          0.86
+   010_potted_meat_can  50           0.85           0.86          0.90
+            011_banana  50           0.78           0.82          0.92
+   021_bleach_cleanser  42           0.82           0.81          0.89
+     022_windex_bottle  49           0.78           0.75          0.84
+               025_mug  46           0.86           0.81          0.81
+       035_power_drill  38           0.85           0.83          1.02
+       051_large_clamp  48           0.74           0.70          0.92
+        061_foam_brick  50           0.85           0.89          0.96
+                   ALL 472           0.82           0.82          0.90

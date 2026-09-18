@@ -1,0 +1,78 @@
+
+=============
+== PyTorch ==
+=============
+
+NVIDIA Release 24.12 (build 126674149)
+PyTorch Version 2.6.0a0+df5bbc0
+Container image Copyright (c) 2024, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+Copyright (c) 2014-2024 Facebook Inc.
+Copyright (c) 2011-2014 Idiap Research Institute (Ronan Collobert)
+Copyright (c) 2012-2014 Deepmind Technologies    (Koray Kavukcuoglu)
+Copyright (c) 2011-2012 NEC Laboratories America (Koray Kavukcuoglu)
+Copyright (c) 2011-2013 NYU                      (Clement Farabet)
+Copyright (c) 2006-2010 NEC Laboratories America (Ronan Collobert, Leon Bottou, Iain Melvin, Jason Weston)
+Copyright (c) 2006      Idiap Research Institute (Samy Bengio)
+Copyright (c) 2001-2004 Idiap Research Institute (Ronan Collobert, Samy Bengio, Johnny Mariethoz)
+Copyright (c) 2015      Google Inc.
+Copyright (c) 2015      Yangqing Jia
+Copyright (c) 2013-2016 The Caffe contributors
+All rights reserved.
+
+Various files include modifications (c) NVIDIA CORPORATION & AFFILIATES.  All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+WARNING: Detected NVIDIA RTX PRO 6000 Blackwell Max-Q Workstation Edition GPU, which is not yet supported in this version of the container
+ERROR: No supported GPU(s) detected to run this container
+
+[DATASET] Open file data/ShapeNet55-34/ShapeNet-55/train.txt
+[DATASET] 41952 instances were loaded
+[DATASET] Open file data/ShapeNet55-34/ShapeNet-55/test.txt
+[DATASET] 10518 instances were loaded
+init: view-partial centre err pred 0.1805  bbox 0.1609
+/workspace/PoinTr/icra_better/canon/train_center_reg_v2.py:90: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)
+  opt.zero_grad(set_to_none=True); loss.backward(); opt.step(); sched.step(); tot += float(loss); n_it += 1
+ep  0 loss 0.1068  view-partial centre err pred 0.1042  bbox 0.1612  33s
+ep  1 loss 0.0987  view-partial centre err pred 0.1086  bbox 0.1608  62s
+ep  2 loss 0.0990  view-partial centre err pred 0.1077  bbox 0.1609  91s
+ep  3 loss 0.0905  view-partial centre err pred 0.1083  bbox 0.1610  120s
+ep  4 loss 0.0908  view-partial centre err pred 0.1028  bbox 0.1613  149s
+ep  5 loss 0.0883  view-partial centre err pred 0.0966  bbox 0.1611  179s
+ep  6 loss 0.0868  view-partial centre err pred 0.1065  bbox 0.1612  208s
+ep  7 loss 0.0872  view-partial centre err pred 0.0983  bbox 0.1611  237s
+ep  8 loss 0.0860  view-partial centre err pred 0.0930  bbox 0.1608  266s
+ep  9 loss 0.0847  view-partial centre err pred 0.0962  bbox 0.1613  294s
+ep 10 loss 0.0840  view-partial centre err pred 0.0918  bbox 0.1612  325s
+ep 11 loss 0.0795  view-partial centre err pred 0.0907  bbox 0.1611  357s
+ep 12 loss 0.0823  view-partial centre err pred 0.0966  bbox 0.1607  386s
+ep 13 loss 0.0815  view-partial centre err pred 0.0943  bbox 0.1610  413s
+ep 14 loss 0.0757  view-partial centre err pred 0.0875  bbox 0.1609  445s
+ep 15 loss 0.0784  view-partial centre err pred 0.0915  bbox 0.1607  476s
+ep 16 loss 0.0756  view-partial centre err pred 0.0932  bbox 0.1613  506s
+ep 17 loss 0.0743  view-partial centre err pred 0.0910  bbox 0.1609  533s
+ep 18 loss 0.0750  view-partial centre err pred 0.0884  bbox 0.1610  563s
+ep 19 loss 0.0757  view-partial centre err pred 0.0845  bbox 0.1612  594s
+ep 20 loss 0.0752  view-partial centre err pred 0.0915  bbox 0.1612  624s
+ep 21 loss 0.0734  view-partial centre err pred 0.0864  bbox 0.1612  650s
+ep 22 loss 0.0714  view-partial centre err pred 0.0869  bbox 0.1610  681s
+ep 23 loss 0.0719  view-partial centre err pred 0.0816  bbox 0.1616  711s
+ep 24 loss 0.0688  view-partial centre err pred 0.0814  bbox 0.1612  741s
+ep 25 loss 0.0695  view-partial centre err pred 0.0826  bbox 0.1607  767s
+ep 26 loss 0.0678  view-partial centre err pred 0.0965  bbox 0.1611  798s
+ep 27 loss 0.0682  view-partial centre err pred 0.0824  bbox 0.1609  828s
+ep 28 loss 0.0663  view-partial centre err pred 0.0800  bbox 0.1611  858s
+ep 29 loss 0.0678  view-partial centre err pred 0.0823  bbox 0.1612  885s
+ep 30 loss 0.0660  view-partial centre err pred 0.0802  bbox 0.1614  916s
+ep 31 loss 0.0665  view-partial centre err pred 0.0802  bbox 0.1607  947s
+ep 32 loss 0.0657  view-partial centre err pred 0.0794  bbox 0.1613  976s
+ep 33 loss 0.0655  view-partial centre err pred 0.0786  bbox 0.1609  1003s
+ep 34 loss 0.0640  view-partial centre err pred 0.0810  bbox 0.1612  1034s
+ep 35 loss 0.0633  view-partial centre err pred 0.0792  bbox 0.1609  1065s
+ep 36 loss 0.0648  view-partial centre err pred 0.0792  bbox 0.1610  1094s
+ep 37 loss 0.0647  view-partial centre err pred 0.0788  bbox 0.1611  1121s
+ep 38 loss 0.0639  view-partial centre err pred 0.0782  bbox 0.1609  1153s
+ep 39 loss 0.0640  view-partial centre err pred 0.0777  bbox 0.1611  1184s
+best view-partial centre err 0.0777 (bbox 0.1611) -> icra_better/ckpts/center_reg_v2.pth

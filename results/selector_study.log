@@ -1,0 +1,30 @@
+953 paired poses; always-partial 50.9%  always-completion 51.4%  object oracle 60.2%  pose oracle 72.4% (noise-inflated)
+univariate: AUC of feature for 'completion wins' (d=+1) vs 'partial wins' (d=-1); pooled and within-object mean
+       epi_mean: pooled 0.413  within-object 0.470
+        epi_p90: pooled 0.433  within-object 0.483
+         epi_cv: pooled 0.322  within-object 0.461
+       epi_tail: pooled 0.388  within-object 0.453
+      ext_ratio: pooled 0.500  within-object 0.511
+  ext_ratio_max: pooled 0.507  within-object 0.510
+        unsup20: pooled 0.702  within-object 0.533
+        unsup40: pooled 0.716  within-object 0.471
+        dn_mean: pooled 0.699  within-object 0.514
+      epi_unsup: pooled 0.383  within-object 0.492
+    n_obs_ratio: pooled 0.500  within-object 0.500
+         radius: pooled 0.344  within-object 0.484
+   model  LOO-object  LOO-seed   (achieved lift success of the selected arm, %)
+   ridge       54.7%     58.1%
+     gbr       48.9%     59.5%
+single-feature rules (choose completion when feature < / > threshold fitted on the other objects):
+       epi_mean: LOO-object 57.0%  (completion when feature < thr)
+        epi_p90: LOO-object 50.5%  (completion when feature < thr)
+         epi_cv: LOO-object 57.5%  (completion when feature < thr)
+       epi_tail: LOO-object 56.0%  (completion when feature < thr)
+      ext_ratio: LOO-object 54.0%  (completion when feature > thr)
+  ext_ratio_max: LOO-object 47.2%  (completion when feature < thr)
+        unsup20: LOO-object 55.9%  (completion when feature > thr)
+        unsup40: LOO-object 58.2%  (completion when feature > thr)
+        dn_mean: LOO-object 55.5%  (completion when feature > thr)
+      epi_unsup: LOO-object 56.9%  (completion when feature < thr)
+    n_obs_ratio: LOO-object 50.9%  (completion when feature > thr)
+         radius: LOO-object 56.9%  (completion when feature < thr)

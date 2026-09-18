@@ -1,0 +1,3 @@
+# regenerable in 8 min (canon/precompute_visibility.py); 85 MB
+data/visibility_*.npz
+__pycache__/

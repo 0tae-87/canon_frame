@@ -1,0 +1,41 @@
+lift success per object (runCanon)
+                object          gate_off      partial_only    complete_canon      complete_reg
+   005_tomato_soup_can     84% (n=50)     94% (n=50)     88% (n=50)     76% (n=50)
+    006_mustard_bottle     76% (n=49)     82% (n=50)     64% (n=50)     68% (n=50)
+   010_potted_meat_can     82% (n=50)     35% (n=49)     62% (n=50)     52% (n=50)
+            011_banana     42% (n=50)     80% (n=50)     54% (n=50)     62% (n=50)
+   021_bleach_cleanser     65% (n=49)     61% (n=46)     60% (n=50)     78% (n=41)
+     022_windex_bottle      6% (n=50)     18% (n=50)      4% (n=50)      0% (n=50)
+               025_mug     79% (n=48)     74% (n=50)     80% (n=49)     82% (n=50)
+       035_power_drill     50% (n=44)     37% (n=46)     52% (n=44)     55% (n=44)
+       051_large_clamp     67% (n=49)     40% (n=50)     24% (n=50)     32% (n=50)
+        061_foam_brick     80% (n=50)     70% (n=50)     74% (n=50)     66% (n=50)
+                   ALL   63.2% (n=489)   59.3% (n=491)   56.2% (n=493)   56.7% (n=485)
+
+complete_canon vs gate_off: 484 paired trials
+                object   gen extent ratio x/y/z  executable ctrl/arm  exec grasp -> nearest OBSERVED pt (mm) ctrl/arm  -> nearest GEN pt
+   005_tomato_soup_can    1.05    1.03    1.03      409.3/391.8                       29.5/22.4                       13.7/13.0   
+    006_mustard_bottle    1.30    1.03    1.07      193.0/169.3                       13.6/22.5                       11.1/13.2   
+   010_potted_meat_can    1.11    1.01    0.99      417.5/380.8                       32.1/32.9                       21.7/22.6   
+            011_banana    1.07    0.90    1.02       39.7/81.9                        65.9/75.8                       58.0/67.3   
+   021_bleach_cleanser    1.46    1.10    1.09      169.0/112.5                       15.9/30.3                       13.2/14.0   
+     022_windex_bottle    1.29    1.21    0.95      222.7/218.0                       39.2/45.2                       16.0/39.7   
+               025_mug    1.02    0.95    1.29       99.4/92.7                        42.1/41.2                       31.4/25.0   
+       035_power_drill    1.32    1.08    1.11      145.5/164.3                       29.3/31.0                       20.7/26.6   
+       051_large_clamp    1.61    1.63    1.44      281.1/309.8                       27.3/21.8                       35.2/15.2   
+        061_foam_brick    1.21    1.07    0.99      255.6/252.9                       61.8/58.7                       53.2/51.7   
+     MEAN over objects    1.24    1.10    1.10      223.3/217.4                       35.7/38.2                       27.4/28.8   
+
+complete_reg vs gate_off: 477 paired trials
+                object   gen extent ratio x/y/z  executable ctrl/arm  exec grasp -> nearest OBSERVED pt (mm) ctrl/arm  -> nearest GEN pt
+   005_tomato_soup_can    1.00    1.01    1.01      409.3/389.5                       29.5/18.5                       13.7/12.7   
+    006_mustard_bottle    1.31    1.06    1.09      193.0/209.7                       13.6/22.3                       11.1/12.1   
+   010_potted_meat_can    1.10    1.01    0.99      417.5/345.4                       32.1/34.0                       21.7/19.9   
+            011_banana    1.06    0.89    1.08       39.7/69.4                        65.9/73.7                       58.0/68.1   
+   021_bleach_cleanser    1.41    1.12    1.03      176.7/92.8                        14.7/33.4                       12.3/12.9   
+     022_windex_bottle    1.27    1.20    1.07      222.7/204.8                       39.2/38.2                       16.0/29.5   
+               025_mug    0.99    1.01    1.33      100.3/96.1                        42.7/43.1                       31.4/29.8   
+       035_power_drill    1.35    1.09    1.18      144.2/167.1                       29.4/34.9                       20.7/24.0   
+       051_large_clamp    1.51    1.76    1.49      281.1/279.6                       27.3/25.6                       35.2/18.9   
+        061_foam_brick    1.19    1.04    1.00      255.6/243.9                       61.8/59.8                       53.2/52.2   
+     MEAN over objects    1.22    1.12    1.13      224.0/209.8                       35.6/38.4                       27.3/28.0   
