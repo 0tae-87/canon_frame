@@ -61,7 +61,7 @@ Every number below has its data on disk (`results/exec_rows/<tag>.csv` for Isaac
   side in every earlier run (config bug, fixed). Marker: plain 62 / partial 14 / v2 52 %.
 - New objects (`runNewLat04` / `runNewFull`): boxes tie across arms (flat faces), clamps
   prefer the partial. 16-object pooled, 40 %: plain 39.1 / partial 45.5 / v2 52.0
-  (v2 vs partial +6.5, p 0.011). Full view: plain 55.7 / partial 47.1 / v2 50.6 on the new
+  (v2 vs partial +6.5, p 0.011; windex still lying in this pool — superseded by the 09-17 trend table). Full view: plain 55.7 / partial 47.1 / v2 50.6 on the new
   objects; on the original objects plain 68.0 / v2 65.8 (n.s.) with the large clamp 66 -> 14.
 - Ensemble gate (3 seeds, correction only when they agree): bench full 6.5 / lateral 9.6
   with the clamp protected — Isaac `runEnsFull` / `runEnsLat04`: 57.2 / 53.4 vs v2 59.1 / 52.0.

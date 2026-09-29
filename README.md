@@ -83,6 +83,8 @@ The v1 -> v2 step is the only change in the whole project that moved lift succes
   diagnosis), `selector_study.py` (Not-to-do 3).
 - `canon/` — regressor model and trainers; `ckpts/` the deployed checkpoint; `data/` the
   visibility masks; `assets/ycb_gt/` mesh surface samples of every YCB asset.
+- `paper/` — IPIU paper package: protocol, results with provenance, outline, figures (`paper/figures/make_figures.py`
+  recomputes every number from `results/`).
 - `results/` — the three tables above, `exec_rows/` (executed-trial rows of every Isaac tag,
   11 MB — the 17 GB grasp logs are not needed for any table), bench/diagnosis logs.
 - Isaac data (`icra/isaac_graspgen/output/graspgen/`): tags runCanon, runCanon_v2, runNewFull,

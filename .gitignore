@@ -1,3 +1,5 @@
 # regenerable in 8 min (canon/precompute_visibility.py); 85 MB
 data/visibility_*.npz
 __pycache__/
+# ICRA supplementary-video tooling and recordings (9.8 GB); not part of the canonical-frame work
+video/
