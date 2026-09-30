@@ -72,3 +72,19 @@ Isaac에서 실행된 완성의 CD(40 %, 원 10 물체): 기존 12.6, v1 11.7, v
 ## 6. 전체 셀 표
 
 `../results/results_table.md`: 전 시야 / 40 % / 40 % seed 1, 22개 자산 × 4 arm(미실행 '-', 누워 있던 windex 'windex*').
+
+## 7. 다른 완성 네트워크로의 전이 — SeedFormer, 재학습 없음 (`../results/seedformer_transfer.md`, `../results/seedformer_bench/`)
+
+공식 SeedFormer ShapeNet-55 checkpoint(epoch 255; 학습 프레임 = 전체 형상 평균 중심·최대 반지름, PoinTr과 동일)에 같은 `center_reg_v2.pth`를
+그대로 붙임. 같은 10 물체 × 15 관측 × {전 시야, 40 % 가림}, 같은 2048 입력점, 출력 8192점 전부 평가(서버가 덧붙이는 관측 tail 없음),
+CD-L1 vs 메시 8192 샘플(mm), 조건마다 들어간 프레임으로 역변환.
+
+| 가림 | bbox 프레임(서버 규칙) | **+ v2** | GT 프레임(참고) | v2 − bbox (paired) |
+|---|---:|---:|---:|---|
+| 0 % (n=150) | 4.28 | **3.74** | 2.98 | −0.54 (−12.5 %), 87/150 개선, Wilcoxon p 3e-4, gap의 42 % 회복 |
+| 40 % (n=150) | 9.24 | **6.60** | 3.55 | −2.64 (−28.6 %), 133/150 개선, p 1e-22, gap의 46 % 회복 |
+
+이득은 recall(mesh→출력: 위치·범위) 16.5 → 10.9 mm에서 나오고 precision(2.0–2.3)은 그대로 — PoinTr 때와 같은 프레임 효과. 물체별
+Δ(40 %): soup −2.7, mustard −2.7, potted −2.8, banana −1.3, bleach −4.6, windex −2.0, mug −3.2, drill −4.6, **clamp −0.2**, foam −2.3;
+전 시야에서 clamp +2.0(중심 오차 5 → 34 mm, ShapeNet 미포함 형상 — PoinTr과 같은 실패). 추가 추론 ≈ 6 ms(학습 작업과 GPU 공유 측정;
+단독 ≈ 1 ms). PoinTr 참고치(같은 관측, 생성점 6144): 7.2 → 6.9 / 12.6 → 9.6 — 출력 점 수가 달라 참고용. 오프라인 형상 평가만 수행.

@@ -63,7 +63,21 @@
 - 정규화 방식(`norm_yaw_offline.py`): 100 구름 × 8 yaw. bbox 중심(오차 0.20 ± 0.13 r)은 CD-L1 +75 %, 무게중심 +124 %;
   스케일 오차는 무해; bbox 오프셋은 형상 의존(고정 시선 방향 이동으로 회복 0) → 학습이 필요.
 
-## 8. 재현 명령 (PoinTr 루트에서)
+## 8. 전이 검증 프로토콜 (SeedFormer)
+
+- 모델: github.com/hrzhou2/seedformer 공식 ShapeNet-55 checkpoint(저자 Google Drive 폴더 `1waTq7npTO068qyOAkK7HkSW0z69JVwAE`,
+  `models/shapenet55/ShapeNet-55/ckpt-best.pth`, epoch 255, `seedformer_dim128`, `UPSAMPLE_FACTORS [1,4,4]`, 2048 → 8192점).
+  학습 규약(저자 코드 `utils/data_loaders.py::pc_norm`, `CONST.N_INPUT_POINTS 2048`): 전체 형상의 평균 중심·최대 반지름 정규화 후 2048점 crop —
+  PoinTr의 ShapeNet-55 로더와 동일하고, 회귀기 v2의 타깃 프레임(`targets()`: 중심 0 / 반지름 1)과 같음 → 회귀기·완성 네트워크 모두 고정, 무수정.
+- 입력: §5의 저장 관측(10 물체 × 15 × {전 시야, 40 %}, 파일 목록 `results/seedformer_bench/meta.json`)의 2048점 tail, 세 조건 모두 동일 점.
+  up-axis 회전은 완성 서버와 동일(`R_align`, 세계 z-up → ShapeNet y-up).
+- 조건: bbox(부분 점군 bbox 중심 + 최대 반지름) / v2(bbox 프레임 → 회귀기의 중심 이동·log 스케일 적용, 재정규화 없음) / gt(메시 평균 중심·최대
+  반지름, 진단용). 출력은 들어간 프레임으로 역변환. `torch.manual_seed(0)` 후 forward; SeedFormer 내부 FPS는 입력에 대해 결정적.
+- 평가: 8192 출력점 전부(서버가 덧붙이는 관측 tail 없음; 네트워크가 관측 영역을 스스로 재생성 — 출력의 ~26 %가 입력점 0.1 mm 이내, 최소거리
+  중앙값 0.3 µm) vs 메시 8192 샘플, CD-L1·precision·recall(mm), 프레임 중심 오차·스케일 비, 시간(`cuda.synchronize`).
+- 스크립트 `analysis/sim_bench_seedformer.py --per-cell 15`; 물체 제외·튜닝 없음.
+
+## 9. 재현 명령 (PoinTr 루트에서)
 
 ```
 python canon_frame/canon/precompute_visibility.py --subset train --views 3      # 8 min

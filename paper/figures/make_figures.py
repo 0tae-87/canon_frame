@@ -174,8 +174,45 @@ def fig_pipeline():
     ax.set_xlim(0, 1); ax.set_ylim(0, 1); save(fig, "fig0_pipeline")
 
 
+# ---------------------------------------------------------------- Fig 8: transfer of the frozen regressor to SeedFormer (offline mesh bench)
+def fig_seedformer():
+    rows = list(csv.DictReader(open(os.path.join(DATA, "seedformer_bench", "rows.csv"))))
+    # PoinTr reference on the same observations (sim_bench_v2.log ALL rows; PoinTr+EDL server, 6144 generated points)
+    txt = open(os.path.join(DATA, "sim_bench_v2.log")).read(); pt = {}
+    for tag, lvl in (("runCanon", "0"), ("runLat04", "0.4")):
+        blk = txt.split("=== " + tag)[1].split("===")[0]
+        allrow = [l.split() for l in blk.splitlines() if l.strip().startswith("ALL")][0]
+        pt[lvl] = {"bbox": float(allrow[2]), "v2": float(allrow[16])}
+    fig, axes = plt.subplots(1, 2, figsize=(7.4, 2.7), gridspec_kw={"width_ratios": [1, 1.5]}, constrained_layout=True)
+    ax = axes[0]; lv = ["0", "0.4"]; x = np.arange(2); w = 0.16
+    cols = {"bbox": C["plain"], "v2": C["v2"], "gt": "#2ca02c"}
+    for i, cond in enumerate(("bbox", "v2", "gt")):
+        ys = [np.mean([float(r["cd_l1_mm"]) for r in rows if r["level"] == l and r["cond"] == cond]) for l in lv]
+        ax.bar(x + (i - 1.5) * w, ys, w, color=cols[cond], label=f"SeedFormer, {cond} frame" if cond != "gt" else "SeedFormer, GT frame (ref.)")
+        for xi, y in zip(x + (i - 1.5) * w, ys): ax.text(xi, y + 0.15, f"{y:.1f}", ha="center", fontsize=6.5)
+    # PoinTr reference as hollow markers beside the bars
+    for i, cond in enumerate(("bbox", "v2")):
+        ys = [pt[l][cond] for l in lv]
+        ax.plot(x + (i - 1.5) * w, ys, marker="_", ms=14, mew=2, ls="none", color="k", label="PoinTr+EDL server, same frame (ref.)" if i == 0 else None)
+    ax.set_xticks(x); ax.set_xticklabels(["full view", "40 % occlusion"]); ax.set_ylabel("completion-to-mesh CD-L1 (mm)"); ax.set_title("(a) frame effect, two completion networks", fontsize=9)
+    ax.set_ylim(0, 14); ax.legend(fontsize=6, frameon=False, loc="upper left")
+    ax = axes[1]; L = [r for r in rows if r["level"] == "0.4"]
+    objs = sorted({r["object"] for r in L}); d = {}
+    for o in objs:
+        b = {int(r["trial"]): float(r["cd_l1_mm"]) for r in L if r["object"] == o and r["cond"] == "bbox"}; v = {int(r["trial"]): float(r["cd_l1_mm"]) for r in L if r["object"] == o and r["cond"] == "v2"}
+        d[o] = np.array([v[t] - b[t] for t in b])
+    objs = sorted(objs, key=lambda o: d[o].mean()); xx = np.arange(len(objs))
+    ax.bar(xx, [d[o].mean() for o in objs], 0.6, color=[C["v2"] if d[o].mean() < 0 else C["plain"] for o in objs])
+    ax.errorbar(xx, [d[o].mean() for o in objs], yerr=[d[o].std(ddof=1) / np.sqrt(len(d[o])) for o in objs], fmt="none", ecolor="#333", capsize=2, lw=0.8)
+    ax.axhline(0, color="#333", lw=0.8); ax.set_xticks(xx); ax.set_xticklabels([SHORT(o) for o in objs], rotation=35, ha="right", fontsize=7)
+    ax.set_ylabel("v2 − bbox CD-L1 (mm)"); ax.set_title("(b) SeedFormer, 40 % occlusion, per object (mean ± s.e., 15 obs.)", fontsize=9)
+    n_win = sum(1 for o in objs for val in d[o] if val < 0); n_all = sum(len(d[o]) for o in objs)
+    ax.text(0.98, 0.92, f"v2 better on {n_win}/{n_all} observations; Wilcoxon p = 1e-22", transform=ax.transAxes, fontsize=6.5, ha="right")
+    save(fig, "fig7_seedformer_transfer")
+
+
 if __name__ == "__main__":
-    fig_pipeline(); fig_trend(); fig_per_object(); fig_bench(); fig_diagnosis(); fig_replication(); fig_training()
+    fig_pipeline(); fig_trend(); fig_per_object(); fig_bench(); fig_diagnosis(); fig_replication(); fig_training(); fig_seedformer()
     # numbers behind fig 1 for RESULTS.md cross-check
     for title, ex in (("16", ()), ("14", tuple(CLAMPS))):
         L = levels(ex)

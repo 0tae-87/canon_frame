@@ -97,3 +97,14 @@ that moved grasps. **Final method: always-on v2.** Workspace cleaned: negative-r
 checkpoints, scripts, bulky Isaac logs/dumps of closed arms removed (executed rows cached in
 `results/exec_rows/`); engine reduced to the v2 path and re-verified on the bench (6.9 / 9.6).
 Open directions in README.md "Future work".
+
+## 2026-09-30 — transfer check: the frozen regressor with SeedFormer (no retraining)
+
+- Official SeedFormer ShapeNet-55 checkpoint (epoch 255; same `pc_norm` frame and 2048-point crop protocol as PoinTr,
+  verified in the authors' loader) + `center_reg_v2.pth` unchanged; same 10 objects × 15 observations × {full, 40 %} as
+  `sim_bench_v2`; frames bbox / v2 / gt(mesh, reference). `analysis/sim_bench_seedformer.py`,
+  `results/seedformer_transfer.md`, per-observation rows in `results/seedformer_bench/`.
+- CD-L1 (mm) bbox → v2: full view 4.28 → **3.74** (−12.5 %, 87/150 better, p 3e-4; gt 2.98); 40 % occluder 9.24 →
+  **6.60** (−28.6 %, 133/150, p 1e-22; gt 3.55). Recall (extent) carries the gain, precision unchanged; v2 closes 42 / 46 %
+  of the bbox→gt gap. Failures as with PoinTr: large clamp (+2.0 at full view), narrow-side bottles under occlusion.
+  Extra cost: one 1.4 M PointNet forward (≈ 6 ms on a shared GPU). Offline shape evaluation only.

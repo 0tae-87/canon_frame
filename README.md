@@ -60,6 +60,14 @@ gives CD 7.2 (full) / 12.6 (40 %); v2 6.9 / 9.6; the earlier crop-trained regres
 the full view worse (8.4, centre error 10 -> 31 mm) because it had never seen a front surface.
 The v1 -> v2 step is the only change in the whole project that moved lift success.
 
+## Transfer to another completion network (2026-09-30)
+
+The same frozen `center_reg_v2.pth` in front of the official SeedFormer ShapeNet-55 checkpoint (no retraining of either;
+SeedFormer's training frame is the same `pc_norm` frame): on the same 10 × 15 observations, CD-L1 bbox → v2 = 4.28 → 3.74 mm
+at full view (−12.5 %, p 3e-4) and 9.24 → 6.60 mm under the 40 % occluder (−28.6 %, 133/150 observations better, p 1e-22),
+i.e. 42 / 46 % of the gap to the true frame; the clamp fails the same way. `results/seedformer_transfer.md`,
+`analysis/sim_bench_seedformer.py`. Offline shape evaluation only.
+
 ## How to reproduce
 
 ```
@@ -76,7 +84,8 @@ The v1 -> v2 step is the only change in the whole project that moved lift succes
 
 ## Layout
 
-- `analysis/` — `sim_cd.py` / `sim_bench.py` (mesh CD, pose from dumps or reconstructed),
+- `analysis/` — `sim_cd.py` / `sim_bench.py` (mesh CD, pose from dumps or reconstructed), `sim_bench_seedformer.py`
+  (the same bench with SeedFormer, three input frames),
   `occlusion_trend.py`, `results_table.py`, `sim_paired_geometry.py`, `occlusion_extent.py`
   (why the plain completion fails), `paired_choice.py` / `paired_strata.py` (paired-pose
   analysis), `yaw_sensitivity.py`, `norm_yaw_offline.py`, `center_offset_stats.py` (offline

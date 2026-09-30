@@ -10,7 +10,7 @@
 |---|---|
 | [PAPER_OUTLINE.md](PAPER_OUTLINE.md) | 논문 구성안: 제목·초록·절별 핵심 문장·그림/표 배치·한계 |
 | [PROTOCOL.md](PROTOCOL.md) | 실험 프로토콜 전문: 시뮬레이터, 물체, 가림 모델, arm 정의, 시행 수, 통계, 회귀기 학습 |
-| [RESULTS.md](RESULTS.md) | 모든 결과표(Isaac 파지, 벤치 CD, 진단, 부정 결과)와 각 숫자의 데이터 출처 |
+| [RESULTS.md](RESULTS.md) | 모든 결과표(Isaac 파지, 벤치 CD, 진단, 부정 결과, SeedFormer 전이)와 각 숫자의 데이터 출처 |
 | `figures/` | 논문 그림 7장(PNG+PDF) + 생성 스크립트 `make_figures.py` + 장면 이미지 |
 | `../results/` | 원천 데이터(상위 폴더): 실행된 시행 행 `exec_rows/*.csv`(논문 표는 12개 태그 사용), 벤치 로그, 진단 JSON, 학습 로그 |
 
@@ -35,6 +35,7 @@
 | Fig. 5 | `fig4_diagnosis_yaw_vs_centre` | 진단: yaw 오프셋 vs CD·epistemic(r 0.96), 중심 정규화 방식별 CD 손실(+75 % / +124 %), bbox 중심 오차 분포 | `yaw_sensitivity_A_summary.json`, `norm_yaw_offline.json` |
 | Fig. 6 | `fig5_seed_replication` | 40 % 가림, seed 0 / seed 1 / seed 1 재추첨의 독립 재현 (8개 물체) | `exec_rows` |
 | Fig. 7 | `fig6_regressor_training` | 회귀기 v2 학습 곡선: held-out 중심 오차 0.161 r(bbox) → 0.078 r | `center_reg_v2_train.log` |
+| Fig. 8 | `fig7_seedformer_transfer` | 전이: 같은 회귀기 + 공식 SeedFormer(재학습 없음), 프레임별 CD와 물체별 Δ, PoinTr 참고치 | `../results/seedformer_bench/rows.csv`, `sim_bench_v2.log` |
 | 보조 | `scene_objects_topview.png` | Isaac 장면의 YCB 물체 상면도 | — |
 
 그림 재생성: `docker run --rm -v /home/wim/Desktop/yt_ws:/workspace -w /workspace/PoinTr pointr_blackwell:gpufix python canon_frame/paper/figures/make_figures.py`
